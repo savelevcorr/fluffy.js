@@ -33,23 +33,29 @@ var FLUFFY = {
             getExt = function (attr) {
                 var src = "",
                     ext = "",
-                    forMatch = [
-                        "pdf",
-                        "doc",
-                        "docx",
-                        "xls",
-                        "zip",
-                        "rar",
-                        "7z",
-                        "svg",
-                        "html",
-                        "js"
-                    ],
                     r   = "";
                 src = el.getAttribute(attr);
                 ext = ( /[.]/.exec(src) ) ? /[^.]+$/.exec(src) : undefined;
 
                 return ext;
+            },
+            getAttr = function (el) {
+                var r = "";
+                if ( el.nodeName === "A" ){
+                    if ( el.hasAttribute("href") ) {
+                        result = getExt("href");
+                    } else {
+                        throw new Error("Error! Can't get 'href' attribute.");
+                    }
+
+                } else if ( el.nodeName === "IMG" ) {
+                    if (el.hasAttribute("src")) {
+                        result = getExt("src");
+                    } else {
+                        throw new Error("Error! Can't get 'src' attribute.");
+                    }
+                }
+                return r;
             };
 
         // if first symbol in passed argument is "." this is a "class"
@@ -58,10 +64,9 @@ var FLUFFY = {
 
             selector = selector.slice(1);
             el = document.getElementsByClassName(selector);
-            /*
-             * Do something
-             *
-             * */
+            for( var i = 0; i < el.length; i++ ) {
+                
+            }
 
         }
         // if first symbol in passed argument is "#" this is "id";
@@ -70,20 +75,8 @@ var FLUFFY = {
             el = document.getElementById(selector);
 
             // nodeName of an element may be "a" and "img" only
-            if ( el.nodeName === "A" ){
-                if ( el.hasAttribute("href") ) {
-                    result = getExt("href");
-                } else {
-                    throw new Error("Error! Can't get 'href' attribute.");
-                }
+            result = getAttr(el);
 
-            } else if ( el.nodeName === "IMG" ) {
-                if (el.hasAttribute("src")) {
-                    result = getExt("src");
-                } else {
-                    throw new Error("Error! Can't get 'src' attribute.");
-                }
-            }
         } else {
             throw new Error("Error! Passed argument is not a 'class' or 'id'");
         }
