@@ -17,6 +17,7 @@ var FLUFFY = {
     },
 
     // Return file extension (pdf, doc, xls etc.)
+    // Only for link-tags or img-tags
     "getExtension" : function (selector) {
         if(arguments.length !== 1) {
             throw new Error("Error! passed "+ arguments.length +" arguments instead of 1.");
