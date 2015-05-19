@@ -4,7 +4,7 @@
 "use strict";
 
 var FLUFFY = {
-    self: this,
+
     // return correct type of passed object
     "classOf": function (o) {
         if(o === null) {
@@ -19,9 +19,9 @@ var FLUFFY = {
     // Return file extension (pdf, doc, xls etc.)
     "getExtension" : function (selector) {
         if(arguments.length !== 1) {
-            throw new Error("Error! passed "+ arguments.length +"arguments instead of 1.");
+            throw new Error("Error! passed "+ arguments.length +" arguments instead of 1.");
         }
-        if(self.classOf(selector) !== "string") {
+        if(this.classOf(selector) !== "String") {
             throw new Error("Error! Expect string, passed: " + this.classOf(selector)+".");
         }
 
@@ -34,7 +34,7 @@ var FLUFFY = {
                     r   = "";
                 src = el.getAttribute(attr);
                 ext = ( /[.]/.exec(src) ) ? /[^.]+$/.exec(src) : undefined;
-                switch (ext) {
+                switch (ext[0]) {
                     case "pdf":
                         r = "pdf";
                         break;
@@ -53,6 +53,9 @@ var FLUFFY = {
                     case "7z":
                         r = "7z";
                         break;
+                    case "html":
+                        r = "html";
+                        break;
                     default :
                         r = "Can't get extension";
                         break;
@@ -63,27 +66,29 @@ var FLUFFY = {
         // if first symbol in passed argument is "." this is a "class"
         // if it "class" it may be an array
         if(firstSymbol === ".") {
+
+            selector = selector.slice(1);
             el = document.getElementsByClassName(selector);
             /*
-            *
-            * Do something
-            *
-            * */
+             * Do something
+             *
+             * */
 
         }
         // if first symbol in passed argument is "#" this is "id";
         else if ( firstSymbol === "#" ) {
+            selector = selector.slice(1);
             el = document.getElementById(selector);
 
-            // NodeType of an element may be "a" and "img" only
-            if ( el.nodeType === "A" ){
+            // nodeName of an element may be "a" and "img" only
+            if ( el.nodeName === "A" ){
                 if ( el.hasAttribute("href") ) {
                     result = getExt("href");
                 } else {
                     throw new Error("Error! Can't get 'href' attribute.");
                 }
 
-            } else if ( el.nodeType === "IMG" ) {
+            } else if ( el.nodeName === "IMG" ) {
                 if (el.hasAttribute("src")) {
                     result = getExt("src");
                 } else {
@@ -93,5 +98,23 @@ var FLUFFY = {
         } else {
             throw new Error("Error! Passed argument is not a 'class' or 'id'");
         }
+        return result;
+    },
+
+    "getSize": function (selector) {
+
+        if(arguments.length !== 1) {
+            throw new Error("Error! passed "+ arguments.length +" arguments instead of 1.");
+        }
+        if(this.classOf(selector) !== "String") {
+            throw new Error("Error! Expect string, passed: " + this.classOf(selector)+".");
+        }
+
+        var el,
+            correctSize = 0;
+        selector = selector.slice(1);
+        correctSize = parseInt(document.getElementById(selector).childNodes[0].data);
+
+        return (correctSize / 1024 / 1024).toFixed(2) + " мб";
     }
 };
