@@ -104,6 +104,6 @@ var FLUFFY = {
         selector = selector.slice(1);
         correctSize = parseInt(document.getElementById(selector).childNodes[0].data);
 
-        return (correctSize / 1024 / 1024).toFixed(2) + " мб";
+        return (correctSize / 1024 / 1024).toFixed(2);
     }
 };
