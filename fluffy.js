@@ -19,10 +19,10 @@ var FLUFFY = {
     // Return file extension (pdf, doc, xls etc.)
     "getExtension" : function (selector) {
         if(arguments.length !== 1) {
-            throw new Error("Error! passed "+ arguments.length +"arguments instead of 1");
+            throw new Error("Error! passed "+ arguments.length +"arguments instead of 1.");
         }
         if(self.classOf(selector) !== "string") {
-            throw new Error("Error! Expect string, passed: " + this.classOf(selector));
+            throw new Error("Error! Expect string, passed: " + this.classOf(selector)+".");
         }
 
         var firstSymbol = selector.charAt(0),
@@ -45,7 +45,9 @@ var FLUFFY = {
             // NodeType of an element may be "a" and "img" only
             if ( el.nodeType === "A" ){
                 if ( el.hasAttribute("href") ) {
-                    
+
+                } else {
+                    throw new Error("Error! Can't get 'href' attribute.");
                 }
 
             } else if ( el.nodeType === "IMG" ) {
