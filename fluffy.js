@@ -6,6 +6,7 @@
 var FLUFFY = {
 
     // return correct type of passed object
+    // Only for JavaScript types like "someString", true/false, {} ... etc.
     "classOf": function (o) {
         if(o === null) {
             return "Null";
