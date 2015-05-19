@@ -26,7 +26,11 @@ var FLUFFY = {
         }
 
         var firstSymbol = selector.charAt(0),
-            el;
+            el,
+            src    = "",
+            ext    = "",
+            result = "";
+        
         // if first symbol in passed argument is "." this is a "class"
         // if it "class" it may be an array
         if(firstSymbol === ".") {
@@ -45,7 +49,31 @@ var FLUFFY = {
             // NodeType of an element may be "a" and "img" only
             if ( el.nodeType === "A" ){
                 if ( el.hasAttribute("href") ) {
-
+                    src = el.getAttribute("href");
+                    ext = ( /[.]/.exec(src) ) ? /[^.]+$/.exec(src) : undefined;
+                    switch (ext) {
+                        case "pdf":
+                            result = "pdf";
+                            break;
+                        case "doc" || "docx":
+                            result = "doc";
+                            break;
+                        case "xls":
+                            result = "xls";
+                            break;
+                        case "zip":
+                            result = "zip";
+                            break;
+                        case "rar":
+                            result = "rar";
+                            break;
+                        case "7z":
+                            result = "7z";
+                            break;
+                        default :
+                            result = "Can't get extension";
+                            break;
+                    }
                 } else {
                     throw new Error("Error! Can't get 'href' attribute.");
                 }
