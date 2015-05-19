@@ -33,39 +33,23 @@ var FLUFFY = {
             getExt = function (attr) {
                 var src = "",
                     ext = "",
+                    forMatch = [
+                        "pdf",
+                        "doc",
+                        "docx",
+                        "xls",
+                        "zip",
+                        "rar",
+                        "7z",
+                        "svg",
+                        "html",
+                        "js"
+                    ],
                     r   = "";
                 src = el.getAttribute(attr);
                 ext = ( /[.]/.exec(src) ) ? /[^.]+$/.exec(src) : undefined;
-                switch (ext[0]) {
-                    case "pdf":
-                        r = "pdf";
-                        break;
-                    case "doc" || "docx":
-                        r = "doc";
-                        break;
-                    case "xls":
-                        r = "xls";
-                        break;
-                    case "zip":
-                        r = "zip";
-                        break;
-                    case "rar":
-                        r = "rar";
-                        break;
-                    case "7z":
-                        r = "7z";
-                        break;
-                    case "html":
-                        r = "html";
-                        break;
-                    case "svg":
-                        r = "svg";
-                        break;
-                    default :
-                        r = "Can't get extension";
-                        break;
-                }
-                return r;
+
+                return ext;
             };
 
         // if first symbol in passed argument is "." this is a "class"
