@@ -28,12 +28,29 @@ var FLUFFY = {
         var firstSymbol = selector.charAt(0),
             el;
         // if first symbol in passed argument is "." this is a "class"
+        // if it "class" it may be an array
         if(firstSymbol === ".") {
             el = document.getElementsByClassName(selector);
+            /*
+            *
+            * Do something
+            *
+            * */
+
         }
         // if first symbol in passed argument is "#" this is "id";
-        else if(firstSymbol === "#") {
+        else if ( firstSymbol === "#" ) {
             el = document.getElementById(selector);
+
+            // NodeType of an element may be "a" and "img" only
+            if ( el.nodeType === "A" ){
+                if ( el.hasAttribute("href") ) {
+                    
+                }
+
+            } else if ( el.nodeType === "IMG" ) {
+
+            }
         }
     }
 };
