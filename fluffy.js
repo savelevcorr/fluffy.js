@@ -58,6 +58,9 @@ var FLUFFY = {
                     case "html":
                         r = "html";
                         break;
+                    case "svg":
+                        r = "svg";
+                        break;
                     default :
                         r = "Can't get extension";
                         break;
