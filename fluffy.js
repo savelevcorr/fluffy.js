@@ -33,8 +33,7 @@
                 result = "",
                 getExt = function (attr) {
                     var src = "",
-                        ext = "",
-                        r   = "";
+                        ext = "";
                     src = el.getAttribute(attr);
                     ext = ( /[.]/.exec(src) ) ? /[^.]+$/.exec(src) : undefined;
     
@@ -44,14 +43,14 @@
                     var r = "";
                     if ( el.nodeName === "A" ){
                         if ( el.hasAttribute("href") ) {
-                            result = getExt("href");
+                            r = getExt("href");
                         } else {
                             throw new Error("Error! Can't get 'href' attribute.");
                         }
     
                     } else if ( el.nodeName === "IMG" ) {
                         if (el.hasAttribute("src")) {
-                            result = getExt("src");
+                            r = getExt("src");
                         } else {
                             throw new Error("Error! Can't get 'src' attribute.");
                         }
